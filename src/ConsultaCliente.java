@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -15,25 +14,25 @@ public class ConsultaCliente extends JFrame {
     private JButton btnOrdemAlfabetica, btnOrdemCodigoCliente, btnSair;
     private JScrollPane scrollTable;
     private JTable objetoTabela;
-    //private JPanel panel;
     private PreparedStatement objetoPreparedStatement;
     private String vSQL;
-    public JFrame frame1;
 
-    public void inicializacomp() {
-        JFrame frame1 = new ConsultaCliente();
+    public ConsultaCliente() {
+        inicializacomponentes();
+        windowOpened();
+        definirEventos();
+    }
+
+    public void inicializacomponentes() {        
+        this.setVisible(true);        
+        this.setSize(1000, 550);
+        this.setLocation(160, 70);
+        this.setTitle("Consultas");
+        this.setResizable(true);        
 
         JPanel panel = new JPanel();
-        frame1.add(panel);
+        this.add(panel);
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-
-        setLayout(null);
-
-        frame1.setSize(1000, 550);
-        frame1.setLocation(160, 70);
-        frame1.setTitle("Consultas");
-
-        frame1.setResizable(true);
 
         btnOrdemAlfabetica = new JButton("Ordem alfabética");
         btnOrdemCodigoCliente = new JButton("Ordenar por Código do Cliente");
@@ -44,8 +43,6 @@ public class ConsultaCliente extends JFrame {
         panel.add(btnOrdemAlfabetica);
         panel.add(btnOrdemCodigoCliente);
         panel.add(btnSair);
-        //frame1.pack();
-        frame1.setVisible(true);
     }
 
     public void windowOpened() {
@@ -54,22 +51,17 @@ public class ConsultaCliente extends JFrame {
             if (!clientes.objetoConexaoBD.getConnection()) {
                 JOptionPane.showMessageDialog(null, "Falha na conexão!");
                 System.exit(0);
-
             }
 
             vSQL = "select * from clientes";
-
             objetoPreparedStatement = clientes.objetoConexaoBD.objetoConnection.prepareStatement(vSQL);
             objetoResultSet = objetoPreparedStatement.executeQuery();
-
             DefaultTableModel tableModel = new DefaultTableModel();
-
             int qtcolunas = objetoResultSet.getMetaData().getColumnCount();
             for (int indice = 1; indice <= qtcolunas; indice++) {
                 tableModel.addColumn(objetoResultSet.getMetaData().getColumnName(indice));
             }
             objetoTabela = new JTable(tableModel);
-
             objetoTabela.getColumnModel().getColumn(0).setPreferredWidth(15);
             objetoTabela.getColumnModel().getColumn(1).setPreferredWidth(150);
             objetoTabela.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -91,22 +83,18 @@ public class ConsultaCliente extends JFrame {
                     System.out.println();
 
                 } catch (SQLException erro) {
-
                 }
                 scrollTable.setViewportView(objetoTabela);
-
             }
             objetoResultSet.close();
             objetoPreparedStatement.close();
             clientes.objetoConexaoBD.close();
-
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Comando SQL inválido!" + erro.toString());
         }
-
     }
 
-    public void defineEvento() {
+    public void definirEventos() {
 
         btnOrdemAlfabetica.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -124,70 +112,13 @@ public class ConsultaCliente extends JFrame {
         btnSair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);                
-                
+                //setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
                 //clientes.objetoConexaoBD.close();
-                setVisible(false);
+                //setVisible(false);
                 dispose();
                 //Runtime.getRuntime().exit(0);
             }
         });
-        /*        try{
-                         clientes = new ClientesDAO();
-                    if (!clientes.bd.g0etConnection()){
-                         JOptionPane.showMessageDialog(null,"Falha na conexão!");
-                         System.exit(0);  
-                              
-                    }
-                    
-                  
-                    vSQL = "select * from cliente order by RA";
-                   
-                    statement = clientes.bd.connection.prepareStatement(vSQL);
-                    resultSet = statement.executeQuery();
-                                     
-                    DefaultTableModel tableModel = new DefaultTableModel();
-                  
-                    int qtcolunas = resultSet.getMetaData().getColumnCount();
-                    for (int indice=1;indice<=qtcolunas;indice++){
-                        tableModel.addColumn(resultSet.getMetaData().getColumnName(indice));
-                    }
-                    table = new JTable(tableModel);
-                    
-                    table.getColumnModel().getColumn(0).setPreferredWidth(10);
-                    table.getColumnModel().getColumn(1).setPreferredWidth(50);
-                    
-                    
-                    while (resultSet.next()){
-                        try{
-                        String[] dados = new String[qtcolunas];
-                        for (int i=1; i<=qtcolunas;i++){
-                        dados[i-1]= resultSet.getString(i);                                             
-                        }
-                        tableModel.addRow(dados);
-                        System.out.println();
-                        
-                    }
-                        catch (SQLException erro){
-                            
-                        }
-                    scrollTable.setViewportView(table);
-                    
-                    
-                    }
-                    resultSet.close();
-                    statement.close();
-                    clientes.bd.close();
-                    
-                    }
-                    catch (Exception erro){
-                      JOptionPane.showMessageDialog(null,"Comando SQL inválido!"+erro.toString());  
-                    }
-                }
-            });
-        
-     
- }*/
     }
 
     public void carregaTable() {

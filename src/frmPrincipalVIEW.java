@@ -3,14 +3,12 @@
  * @author William Marques
  */
 public class frmPrincipalVIEW extends javax.swing.JFrame {
-
     /**
      * Creates new form TelaPrincipal
      */
     public frmPrincipalVIEW() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -24,6 +22,7 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         btnPedidos = new javax.swing.JButton();
         btnProdutos = new javax.swing.JButton();
         btnItens = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(450, 200));
@@ -60,6 +59,14 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
             }
         });
 
+        btnSair.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,6 +84,10 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
                         .addComponent(btnItens, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(148, 148, 148)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,6 +100,8 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnItens, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -96,12 +109,12 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        //estaciar a tela cliente
+        //estanciar a tela cliente
         GuiCadastroClientes objetoguicadastroclientes = new GuiCadastroClientes();
         //exibir o objeto tela cliente
         objetoguicadastroclientes.setVisible(true);
         //fechar a tela Principal
-        dispose();        
+        dispose();
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
@@ -115,6 +128,10 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
     private void btnItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItensActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnItensActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,5 +174,6 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
     private javax.swing.JButton btnItens;
     private javax.swing.JButton btnPedidos;
     private javax.swing.JButton btnProdutos;
+    private javax.swing.JButton btnSair;
     // End of variables declaration//GEN-END:variables
 }

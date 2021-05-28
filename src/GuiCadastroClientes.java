@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 class GuiCadastroClientes extends JFrame {
 
     JLabel labelCodigoCliente, labelNome, labelEndereco, labelBairro, labelCidade, labelCEP, labelUF, labelEmail, labelFone, labelCelular, label3, label4;
-    JButton btGravar, btAlterar, btExcluir, btNovo, btLocalizar, btCancelar, btSair;
+    JButton btGravar, btAlterar, btExcluir, btNovo, btLocalizar, btCancelar, btVoltarMenuPrincipal, btSair;
     JButton btPrimeiro, btAnterior, btProximo, btUltimo, btCons;
     JPanel painel, painelBotoes, painelREG;
     JFrame janela;
@@ -25,19 +25,13 @@ class GuiCadastroClientes extends JFrame {
     private ResultSet objetoResultSet;
     private ConsultaCliente consultaClientes;
 
-    public static void main(String args[]) {
-        JFrame janela = new GuiCadastroClientes();
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setVisible(true);
-    }
-
     public GuiCadastroClientes() {
         inicializacomponentes();
         definirEventos();
-
     }
 
     public void inicializacomponentes() {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());     //define layout da janela
 
         painel = new JPanel();
@@ -80,6 +74,7 @@ class GuiCadastroClientes extends JFrame {
         btNovo = new JButton("Novo");
         btCancelar = new JButton("Cancelar");
         btCons = new JButton("Consultar");
+        btVoltarMenuPrincipal = new JButton("Menu Principal");
         btSair = new JButton("Sair");
         btPrimeiro = new JButton("<<");
         btPrimeiro.setToolTipText("Primeiro");
@@ -116,6 +111,7 @@ class GuiCadastroClientes extends JFrame {
         painelBotoes.add(btExcluir);
         painelBotoes.add(btCancelar);
         painelBotoes.add(btCons);
+        painelBotoes.add(btVoltarMenuPrincipal);
         painelBotoes.add(btSair);
         painelREG.add(label3);
         painelREG.add(btPrimeiro);
@@ -152,6 +148,18 @@ class GuiCadastroClientes extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 clientes.objetoConexaoBD.close();
                 System.exit(0);
+            }
+        });
+
+        btVoltarMenuPrincipal.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                clientes.objetoConexaoBD.close();
+                //estanciar a tela cliente
+                frmPrincipalVIEW objetofrmPrincipalVIEW = new frmPrincipalVIEW();
+                //exibir o objeto tela principal
+                objetofrmPrincipalVIEW.setVisible(true);
+                //fechar a tela 
+                dispose();
             }
         });
 
@@ -290,11 +298,8 @@ class GuiCadastroClientes extends JFrame {
 
         btCons.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                consultaClientes = new ConsultaCliente();
-                consultaClientes.inicializacomp();
-                consultaClientes.windowOpened();
-                consultaClientes.defineEvento();
-
+                JFrame janela = new ConsultaCliente();
+                janela.setVisible(true);
             }
         });
 
