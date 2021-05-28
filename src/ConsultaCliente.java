@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -5,17 +6,15 @@ import javax.swing.table.*;
 
 /**
  *
- * @author luciana
+ * @author William Marques
  */
 public class ConsultaCliente extends JFrame {
 
     private ClientesDAO clientes;
     private ResultSet objetoResultSet;
-    private JLabel label1;
-    private JTextField TextFieldSQL;
-    private JButton btExec, btCodigoCliente, btSair;
+    private JButton btnOrdemAlfabetica, btnOrdemCodigoCliente, btnSair;
     private JScrollPane scrollTable;
-    private JTable table;
+    private JTable objetoTabela;
     //private JPanel panel;
     private PreparedStatement objetoPreparedStatement;
     private String vSQL;
@@ -26,25 +25,26 @@ public class ConsultaCliente extends JFrame {
 
         JPanel panel = new JPanel();
         frame1.add(panel);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
         setLayout(null);
 
-        frame1.setSize(600, 600);
-        setBounds(300, 10, 750, 600);
+        frame1.setSize(1000, 550);
+        frame1.setLocation(160, 70);
         frame1.setTitle("Consultas");
 
         frame1.setResizable(true);
 
-        btExec = new JButton("Ordem alfabética");
-        btCodigoCliente = new JButton("Ordem do Código do Cliente");
-        btSair = new JButton("Sair");
+        btnOrdemAlfabetica = new JButton("Ordem alfabética");
+        btnOrdemCodigoCliente = new JButton("Ordenar por Código do Cliente");
+        btnSair = new JButton("Sair");
         scrollTable = new JScrollPane();
 
         panel.add(scrollTable);
-        panel.add(btExec);
-        panel.add(btCodigoCliente);
-        panel.add(btSair);
-        frame1.pack();
+        panel.add(btnOrdemAlfabetica);
+        panel.add(btnOrdemCodigoCliente);
+        panel.add(btnSair);
+        //frame1.pack();
         frame1.setVisible(true);
     }
 
@@ -68,10 +68,18 @@ public class ConsultaCliente extends JFrame {
             for (int indice = 1; indice <= qtcolunas; indice++) {
                 tableModel.addColumn(objetoResultSet.getMetaData().getColumnName(indice));
             }
-            table = new JTable(tableModel);
+            objetoTabela = new JTable(tableModel);
 
-            table.getColumnModel().getColumn(0).setPreferredWidth(100);
-            table.getColumnModel().getColumn(1).setPreferredWidth(800);
+            objetoTabela.getColumnModel().getColumn(0).setPreferredWidth(15);
+            objetoTabela.getColumnModel().getColumn(1).setPreferredWidth(150);
+            objetoTabela.getColumnModel().getColumn(2).setPreferredWidth(100);
+            objetoTabela.getColumnModel().getColumn(3).setPreferredWidth(60);
+            objetoTabela.getColumnModel().getColumn(4).setPreferredWidth(60);
+            objetoTabela.getColumnModel().getColumn(5).setPreferredWidth(60);
+            objetoTabela.getColumnModel().getColumn(6).setPreferredWidth(35);
+            objetoTabela.getColumnModel().getColumn(7).setPreferredWidth(90);
+            objetoTabela.getColumnModel().getColumn(8).setPreferredWidth(80);
+            objetoTabela.getColumnModel().getColumn(9).setPreferredWidth(80);
 
             while (objetoResultSet.next()) {
                 try {
@@ -85,7 +93,7 @@ public class ConsultaCliente extends JFrame {
                 } catch (SQLException erro) {
 
                 }
-                scrollTable.setViewportView(table);
+                scrollTable.setViewportView(objetoTabela);
 
             }
             objetoResultSet.close();
@@ -100,27 +108,27 @@ public class ConsultaCliente extends JFrame {
 
     public void defineEvento() {
 
-        btExec.addActionListener(new ActionListener() {
+        btnOrdemAlfabetica.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 vSQL = "select * from clientes order by Nome";
                 carregaTable();
             }
         });
-        btCodigoCliente.addActionListener(new ActionListener() {
+        btnOrdemCodigoCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 vSQL = "select * from clientes order by codcli";
                 carregaTable();
             }
         });
 
-        btSair.addActionListener(new ActionListener() {
+        btnSair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-                //clientes.bd.close();
-                //setVisible(false);
-                // dispose();
+                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);                
+                
+                //clientes.objetoConexaoBD.close();
+                setVisible(false);
+                dispose();
                 //Runtime.getRuntime().exit(0);
             }
         });
@@ -202,10 +210,18 @@ public class ConsultaCliente extends JFrame {
             for (int indice = 1; indice <= qtcolunas; indice++) {
                 tableModel.addColumn(objetoResultSet.getMetaData().getColumnName(indice));
             }
-            table = new JTable(tableModel);
+            objetoTabela = new JTable(tableModel);
 
-            table.getColumnModel().getColumn(0).setPreferredWidth(100);
-            table.getColumnModel().getColumn(1).setPreferredWidth(800);
+            objetoTabela.getColumnModel().getColumn(0).setPreferredWidth(15);
+            objetoTabela.getColumnModel().getColumn(1).setPreferredWidth(150);
+            objetoTabela.getColumnModel().getColumn(2).setPreferredWidth(100);
+            objetoTabela.getColumnModel().getColumn(3).setPreferredWidth(60);
+            objetoTabela.getColumnModel().getColumn(4).setPreferredWidth(60);
+            objetoTabela.getColumnModel().getColumn(5).setPreferredWidth(60);
+            objetoTabela.getColumnModel().getColumn(6).setPreferredWidth(35);
+            objetoTabela.getColumnModel().getColumn(7).setPreferredWidth(90);
+            objetoTabela.getColumnModel().getColumn(8).setPreferredWidth(80);
+            objetoTabela.getColumnModel().getColumn(9).setPreferredWidth(80);
 
             while (objetoResultSet.next()) {
                 try {
@@ -219,7 +235,7 @@ public class ConsultaCliente extends JFrame {
                 } catch (SQLException erro) {
 
                 }
-                scrollTable.setViewportView(table);
+                scrollTable.setViewportView(objetoTabela);
 
             }
             objetoResultSet.close();

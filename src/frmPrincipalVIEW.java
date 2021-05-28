@@ -26,6 +26,7 @@ public class frmPrincipalVIEW extends javax.swing.JFrame {
         btnItens = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(450, 200));
 
         btnClientes.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
         btnClientes.setText("Clientes");

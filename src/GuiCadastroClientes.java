@@ -51,7 +51,7 @@ class GuiCadastroClientes extends JFrame {
         this.add(painelREG, BorderLayout.SOUTH);
 
         setTitle("Cadastro de Clientes");
-        setBounds(300, 10, 750, 600);
+        setBounds(300, 50, 750, 600);
         labelCodigoCliente = new JLabel("Código do Cliente: ");
         textFieldCodigoCliente = new JTextField(4);
         labelNome = new JLabel("Nome: ");
