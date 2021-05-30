@@ -38,9 +38,11 @@ CREATE TABLE `vendas`.`produtos` (
   PRIMARY KEY (`codprod`));
   
 CREATE TABLE `vendas`.`itens_ped` (
+`id` INT NOT NULL AUTO_INCREMENT,
   `codped` INT NOT NULL,
   `codprod` INT NOT NULL,
   `qtde` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`id`),
   INDEX `codped_idx` (`codped` ASC) VISIBLE,
   INDEX `codprod_idx` (`codprod` ASC) VISIBLE,
   CONSTRAINT `codped`
